@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: mysql
+    image: mariadb/server:10.3
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD='yes'
+      - MYSQL_ROOT_PASSWORD=
+    ports:
+      - "3308:3306"
+  php7.1:
+    build: './php7.1'
+    stdin_open: true
+    container_name: php7.1
+    depends_on:
+      - mysql
+    volumes:
+      - '${MY_COMPOSER_DIR}:/var/www'
+      - './projects/${MY_COMPOSER_PROJECT}/php7.1:/var/www/vendor/'
+  php7.1low:
+    build: './php7.1'
+    stdin_open: true
+    container_name: php7.1low
+    depends_on:
+      - mysql
+    volumes:
+      - '${MY_COMPOSER_DIR}:/var/www'
+      - './projects/${MY_COMPOSER_PROJECT}/php7.1-lowest:/var/www/vendor/'
+  php7.2:
+    build: './php7.2'
+    stdin_open: true
+    container_name: php7.2
+    depends_on:
+      - mysql
+    volumes:
+      - '${MY_COMPOSER_DIR}:/var/www'
+      - './projects/${MY_COMPOSER_PROJECT}/php7.2:/var/www/vendor/'
+  php7.2low:
+    build: './php7.2'
+    stdin_open: true
+    container_name: php7.2low
+    depends_on:
+      - mysql
+    volumes:
+      - '${MY_COMPOSER_DIR}:/var/www'
+      - './projects/${MY_COMPOSER_PROJECT}/php7.2-lowest:/var/www/vendor/'
+  php7.3:
+    build: './php7.3'
+    stdin_open: true
+    container_name: php7.3
+    depends_on:
+      - mysql
+    volumes:
+      - '${MY_COMPOSER_DIR}:/var/www'
+      - './projects/${MY_COMPOSER_PROJECT}/php7.3:/var/www/vendor/'
+  php7.3low:
+    build: './php7.3'
+    stdin_open: true
+    container_name: php7.3low
+    depends_on:
+      - mysql
+    volumes:
+      - '${MY_COMPOSER_DIR}:/var/www'
+      - './projects/${MY_COMPOSER_PROJECT}/php7.3-lowest:/var/www/vendor/'
